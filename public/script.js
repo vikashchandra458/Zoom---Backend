@@ -6,7 +6,7 @@ let myVideoStream;
 var myPeer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: "3030",
+  port: "3000",
 });
 
 navigator.mediaDevices
@@ -28,13 +28,16 @@ navigator.mediaDevices
     let text = $("input");
     $("html").keydown((e) => {
       if (e.which == 13 && text.val().length !== 0) {
+        $("ul").append(
+          `<li class="message1" style="text-align:right; padding-right:30px"><b>me</b><br/>${text.val()}</li>`
+        );
         socket.emit("message", text.val());
         text.val("");
       }
     });
 
     socket.on("createMessage", (message) => {
-      $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+      $("ul").append(`<li class="message2"><b>user</b><br/>${message}</li>`);
       scrollToBottom();
     });
   });
@@ -110,7 +113,6 @@ const setPlayButton = () => {
   document.querySelector(".main__video_button").innerHTML = html;
 };
 
-
 const leave = () => {
   document.getElementById("myForm").submit();
-}
+};

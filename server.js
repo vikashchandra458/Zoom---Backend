@@ -26,10 +26,11 @@ io.on("connection", (socket) => {
 
     socket.broadcast.to(roomId).emit("user-connected", userId);
     socket.on("message", (message) => {
-      io.to(roomId).emit("createMessage", message);
+      socket.broadcast.to(roomId).emit("createMessage", message);
+      // io.to(roomId).emit("createMessage", message);
     });
   });
 });
-server.listen(process.env.PORT || 3030, () => {
+server.listen(process.env.PORT || 3000, () => {
   console.log(`Server listening on port ${process.env.PORT || 3030}`);
 });
