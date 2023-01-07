@@ -66,7 +66,7 @@
               <i class="fas fa-user-friends"></i>
               <span>Participants</span>
             </div>
-            <div class="main__controls__button">
+            <div class="js-click main__controls__button">
               <i class="fas fa-comment-alt"></i>
               <span>Chat</span>
             </div>
@@ -95,6 +95,56 @@
             type="text"
             placeholder="Type message here"
           />
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Enter your name to start chart</h4>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <!-- <div class="form-group files color justify-content-center">
+              <label>Please Enter your password</label>
+              <input
+                type="text"
+                class="form-control"
+                id="input"
+                name="password"
+              />
+            </div> -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3"
+                  >Your Name</span
+                >
+              </div>
+              <input type="text" class="form-control" id="txt_name" />
+            </div>
+            <pre
+              id="error"
+              style="color: red; text-align: right; margin-top: -15px"
+            ></pre>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="cancel btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="confirm btn btn-primary">
+              Confirm
+            </button>
+          </div>
         </div>
       </div>
     </div>

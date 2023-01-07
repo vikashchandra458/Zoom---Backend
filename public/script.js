@@ -26,18 +26,39 @@ navigator.mediaDevices
     });
 
     let text = $("input");
+    let name = $("#txt_name").val();
     $("html").keydown((e) => {
       if (e.which == 13 && text.val().length !== 0) {
-        $("ul").append(
-          `<li class="message1" style="text-align:right; padding-right:30px"><b>me</b><br/>${text.val()}</li>`
-        );
-        socket.emit("message", text.val());
-        text.val("");
+        if (name !== "") {
+          $("ul").append(
+            `<li class="message" style="text-align:right; padding-right:30px; color:green"><b>${name}</b><br/>${text.val()}</li>`
+          );
+          socket.emit("message", text.val(), name);
+          text.val("");
+        } else {
+          $("#myModal").show();
+          text.val("");
+        }
       }
     });
+    $(".cancel").click(function () {
+      $("#myModal").hide();
+    });
+    $(".confirm").click(function () {
+      name = $("#txt_name").val();
+      $("#myModal").hide();
+    });
 
-    socket.on("createMessage", (message) => {
-      $("ul").append(`<li class="message2"><b>user</b><br/>${message}</li>`);
+    socket.on("createMessage", (message, name) => {
+      $("ul").append(`<li class="message"style="color:yellow"><b>${name}</b><br/>${message}</li>`);
+      scrollToBottom();
+    });
+
+    socket.on("disconnectUser", (userId) => {
+      // if (myPeer[userId]) myPeer[userId].close();
+      $("ul").append(
+        `<li class="message" style="text-align:center"><b>${name}</b><br/>${userId} Disconnected</li>`
+      );
       scrollToBottom();
     });
   });
@@ -116,3 +137,16 @@ const setPlayButton = () => {
 const leave = () => {
   document.getElementById("myForm").submit();
 };
+
+function a() {
+  $(".main__left").css("flex", "1");
+  $(".main__right").css("display", "none");
+}
+function b() {
+  $(".main__left").css("flex", "0.8");
+  $(".main__right").css("display", "flex");
+}
+
+$(".js-click").click(function () {
+  return (this.tog = !this.tog) ? a() : b();
+});

@@ -25,9 +25,12 @@ io.on("connection", (socket) => {
     socket.join(roomId);
 
     socket.broadcast.to(roomId).emit("user-connected", userId);
-    socket.on("message", (message) => {
-      socket.broadcast.to(roomId).emit("createMessage", message);
-      // io.to(roomId).emit("createMessage", message);
+    socket.on("message", (message, name) => {
+      socket.broadcast.to(roomId).emit("createMessage", message, name);
+    });
+
+    socket.on("disconnect", function () {
+      io.to(roomId).emit("disconnectUser", userId);
     });
   });
 });
