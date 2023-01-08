@@ -18,7 +18,9 @@ navigator.mediaDevices
       call.answer(stream);
       const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
-        addVideoStream(video, userVideoStream);
+        setTimeout(() => {
+          addVideoStream(video, userVideoStream);
+        }, 1000);
       });
     });
     socket.on("user-connected", (userId) => {
@@ -26,14 +28,14 @@ navigator.mediaDevices
     });
 
     let text = $("input");
-    let name = $("#txt_name").val();
+    // let name = $("#txt_name").val();
     $("html").keydown((e) => {
       if (e.which == 13 && text.val().length !== 0) {
-        if (name !== "") {
+        if (USER_NAME !== "") {
           $("ul").append(
-            `<li class="message" style="text-align:right; padding-right:30px; color:green"><b>${name}</b><br/>${text.val()}</li>`
+            `<li class="message" style="text-align:right; padding-right:30px; color:green"><b>${USER_NAME}</b><br/>${text.val()}</li>`
           );
-          socket.emit("message", text.val(), name);
+          socket.emit("message", text.val(), USER_NAME);
           text.val("");
         } else {
           $("#myModal").show();
@@ -45,32 +47,36 @@ navigator.mediaDevices
       $("#myModal").hide();
     });
     $(".confirm").click(function () {
-      name = $("#txt_name").val();
+      // name = $("#txt_name").val();
       $("#myModal").hide();
     });
 
     socket.on("createMessage", (message, name) => {
-      $("ul").append(`<li class="message"style="color:yellow"><b>${name}</b><br/>${message}</li>`);
+      $("ul").append(
+        `<li class="message"style="color:yellow"><b>${name}</b><br/>${message}</li>`
+      );
       scrollToBottom();
     });
 
-    socket.on("disconnectUser", (userId) => {
+    socket.on("disconnectUser", (name) => {
       // if (myPeer[userId]) myPeer[userId].close();
       $("ul").append(
-        `<li class="message" style="text-align:center"><b>${name}</b><br/>${userId} Disconnected</li>`
+        `<li class="message" style="text-align:center; color:red">${name} Left</li>`
       );
       scrollToBottom();
     });
   });
 
 myPeer.on("open", (id) => {
-  socket.emit("join-room", ROOM_ID, id);
+  socket.emit("join-room", ROOM_ID, id, USER_NAME);
 });
 const connectToNewUser = (userId, stream) => {
   const call = myPeer.call(userId, stream);
   const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
-    addVideoStream(video, userVideoStream);
+    setTimeout(() => {
+      addVideoStream(video, userVideoStream);
+    }, 1000);
   });
 };
 const addVideoStream = (video, stream) => {
@@ -149,4 +155,12 @@ function b() {
 
 $(".js-click").click(function () {
   return (this.tog = !this.tog) ? a() : b();
+});
+
+$(document).ready(function () {
+  window.history.pushState(null, "", window.location.href);
+
+  window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+  };
 });

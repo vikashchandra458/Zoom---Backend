@@ -110,7 +110,7 @@
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title">Join Room</h4>
+            <h4 id="title" class="modal-title">Join Room</h4>
           </div>
 
           <!-- Modal body -->
@@ -127,37 +127,50 @@
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon3"
-                  >Please Enter the Room ID</span
+                  >Your Name</span
                 >
               </div>
-              <input type="text" class="form-control" id="roomID" />
+              <input type="text" class="form-control" id="yourName" />
             </div>
             <pre
-              id="error"
+              id="errorName"
               style="color: red; text-align: right; margin-top: -15px"
             ></pre>
+            <!-- </div> -->
+            <div id="see">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3"
+                    >Please Enter the Room ID</span
+                  >
+                </div>
+                <input type="text" class="form-control" id="roomID" />
+              </div>
+              <pre
+                id="error"
+                style="color: red; text-align: right; margin-top: -15px"
+              ></pre>
+            </div>
           </div>
 
           <!-- Modal footer -->
           <div class="modal-footer">
             <button
+              id="close"
               type="button"
               class="btn btn-danger"
               data-bs-dismiss="modal"
             >
               Close
             </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="myFunction()"
-            >
+            <button type="button" class="btn btn-primary" id="confirm">
               Confirm
             </button>
           </div>
         </div>
       </div>
     </div>
+
     <section class="vh-100" style="background-color: #eee">
       <div class="container h-75">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -226,50 +239,85 @@
 
     <footer class="footer">&copy; Copyright 2022 v!kash chandra</footer>
   </body>
+  <script src="script.js"></script>
   <script>
-    const url = window.location.href;
-    const redirectedUrl = "";
-
-    document.getElementById("createRoom").addEventListener("click", () => {
-      if (
-        window.location.href.charAt(window.location.href.length - 1) === "?"
-      ) {
-        location.replace(
-          `${window.location.href.substring(
-            0,
-            window.location.href.length - 1
-          )}<%=uuid%>`
-        );
-      } else {
-        location.replace(`${window.location.href}<%=uuid%>`);
-      }
-    });
-    document.getElementById("joinRoom").addEventListener("click", () => {
-      document.getElementById("myBtn").click();
-    });
-    function myFunction() {
-      console.log(document.getElementById("roomID").value.length);
-      if (document.getElementById("roomID").value.length === 36) {
-        document.getElementById("error").innerHTML = "";
-        if (
-          window.location.href.charAt(window.location.href.length - 1) === "?"
-        ) {
-          location.replace(
-            `${
-              window.location.href.substring(
-                0,
-                window.location.href.length - 1
-              ) + document.getElementById("roomID").value
-            }`
-          );
+    const USER_NAME = ocument.getElementById("yourName").value;
+  </script>
+  <script>
+    document.getElementById("confirm").addEventListener("click", () => {
+      if (document.getElementById("yourName").value.length < 3) {
+        if (document.getElementById("yourName").value.length === 0) {
+          document.getElementById("errorName").innerHTML = "Name Required";
         } else {
-          location.replace(
-            `${window.location.href + document.getElementById("roomID").value}`
-          );
+          document.getElementById("errorName").innerHTML =
+            "Atleast 3 characters are required";
         }
       } else {
-        document.getElementById("error").innerHTML = "Invalid Room ID";
+        document.getElementById("errorName").innerHTML = "";
       }
-    }
+    });
+    document.getElementById("close").addEventListener("click", () => {
+      document.getElementById("error").innerHTML = "";
+      document.getElementById("errorName").innerHTML = "";
+      document.getElementById("roomID").value = "";
+      document.getElementById("yourName").value = "";
+    });
+
+    document.getElementById("createRoom").addEventListener("click", () => {
+      document.getElementById("see").style.visibility = "hidden";
+      document.getElementById("title").innerHTML = "Create Room";
+      document.getElementById("errorName").style.marginBottom = "-40px";
+      document.getElementById("myBtn").click();
+      document.getElementById("confirm").addEventListener("click", () => {
+        if (document.getElementById("yourName").value.length > 2) {
+          var f = document.createElement("form");
+          f.action = `/${"<%=uuid%>"}`;
+          f.method = "POST";
+          f.target = "_self";
+
+          var i = document.createElement("input");
+          i.type = "hidden";
+          i.name = "fragment";
+          i.value = document.getElementById("yourName").value;
+          f.appendChild(i);
+
+          document.body.appendChild(f);
+          f.submit();
+        }
+      });
+    });
+
+    document.getElementById("joinRoom").addEventListener("click", () => {
+      document.getElementById("see").style.visibility = "visible";
+      document.getElementById("title").innerHTML = "Join Room";
+      document.getElementById("errorName").style.marginBottom = "20px";
+      document.getElementById("myBtn").click();
+      document.getElementById("confirm").addEventListener("click", () => {
+        if (document.getElementById("roomID").value.length !== 0) {
+          if (document.getElementById("roomID").value.length === 36) {
+            document.getElementById("error").innerHTML = "";
+            if (document.getElementById("yourName").value.length > 2) {
+              var f = document.createElement("form");
+              f.action = `/${document.getElementById("roomID").value}`;
+              f.method = "POST";
+              f.target = "_self";
+
+              var i = document.createElement("input");
+              i.type = "hidden";
+              i.name = "fragment";
+              i.value = document.getElementById("yourName").value;
+              f.appendChild(i);
+
+              document.body.appendChild(f);
+              f.submit();
+            }
+          } else {
+            document.getElementById("error").innerHTML = "Invalid Room ID";
+          }
+        } else {
+          document.getElementById("error").innerHTML = "Room ID Required";
+        }
+      });
+    });
   </script>
 </html>
