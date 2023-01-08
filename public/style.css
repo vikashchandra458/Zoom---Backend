@@ -19,7 +19,9 @@ video {
 }
 
 .main {
-  height: 100vh;
+  height: fill-available;
+  height: -webkit-fill-available;
+  min-height: 100vh;
   display: flex;
 }
 .main__left {
