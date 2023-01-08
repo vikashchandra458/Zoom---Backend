@@ -30,8 +30,8 @@ app.post("/:room", (req, res) => {
     res.redirect("/");
   }
 });
-app.get('*', function(req, res) {
-  res.redirect('/');
+app.get("*", function (req, res) {
+  res.redirect("/");
 });
 
 io.on("connection", (socket) => {
@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", function () {
-      io.to(roomId).emit("disconnectUser", userName);
+      io.to(roomId).emit("disconnectUser", userName, userId);
     });
   });
 });

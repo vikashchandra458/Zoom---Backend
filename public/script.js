@@ -18,13 +18,11 @@ navigator.mediaDevices
       call.answer(stream);
       const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
-        setTimeout(() => {
-          addVideoStream(video, userVideoStream);
-        }, 1000);
+        addVideoStream(video, userVideoStream);
       });
     });
     socket.on("user-connected", (userId) => {
-      connectToNewUser(userId, stream);
+      setTimeout(connectToNewUser, 1000, userId, stream);
     });
 
     let text = $("input");
@@ -58,8 +56,8 @@ navigator.mediaDevices
       scrollToBottom();
     });
 
-    socket.on("disconnectUser", (name) => {
-      // if (myPeer[userId]) myPeer[userId].close();
+    socket.on("disconnectUser", (name, userId) => {
+      if (myPeer[userId]) myPeer[userId].close();
       $("ul").append(
         `<li class="message" style="text-align:center; color:red">${name} Left</li>`
       );
@@ -74,9 +72,7 @@ const connectToNewUser = (userId, stream) => {
   const call = myPeer.call(userId, stream);
   const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
-    setTimeout(() => {
-      addVideoStream(video, userVideoStream);
-    }, 1000);
+    addVideoStream(video, userVideoStream);
   });
 };
 const addVideoStream = (video, stream) => {
