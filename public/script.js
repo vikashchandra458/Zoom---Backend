@@ -164,7 +164,7 @@ $(document).ready(function () {
 const shareData = {
   title: "WhatsApp",
   text: ROOM_ID,
-  url: `https://wa.me/?text=${ROOM_ID}`,
+  // url: `https://wa.me/?text=${ROOM_ID}`,
 };
 
 const btn = document.getElementById("add");
