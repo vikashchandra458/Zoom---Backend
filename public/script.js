@@ -160,3 +160,17 @@ $(document).ready(function () {
     window.history.pushState(null, "", window.location.href);
   };
 });
+
+const shareData = {
+  text: ROOM_ID,
+};
+
+const btn = document.getElementById("add");
+
+btn.addEventListener("click", async () => {
+  try {
+    await navigator.share(shareData);
+  } catch (err) {
+    resultPara.textContent = `Error: ${err}`;
+  }
+});
