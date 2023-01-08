@@ -6,7 +6,7 @@ let myVideoStream;
 var myPeer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: "443",
+  port: "3000",
 });
 
 navigator.mediaDevices
@@ -162,14 +162,19 @@ $(document).ready(function () {
 });
 
 const shareData = {
+  title: "WhatsApp",
   text: ROOM_ID,
+  url: `https://wa.me/?text=${ROOM_ID}`,
 };
 
 const btn = document.getElementById("add");
+const resultPara = document.querySelector(".result");
 
+// Share must be triggered by "user activation"
 btn.addEventListener("click", async () => {
   try {
     await navigator.share(shareData);
+    // resultPara.textContent = "MDN shared successfully";
   } catch (err) {
     resultPara.textContent = `Error: ${err}`;
   }
