@@ -17,10 +17,10 @@ app.set("view engine", "ejs"); // to use ejs
 app.use(express.static("public")); // to use scripts
 app.use("/peerjs", peerServer);
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.render("homepage", { uuid: uuidv4() });
 });
-app.post("/:room", (req, res) => {
+app.post("/:room", async (req, res) => {
   if (req.body.fragment) {
     res.render("room", {
       roomId: req.params.room,
@@ -30,7 +30,7 @@ app.post("/:room", (req, res) => {
     res.redirect("/");
   }
 });
-app.get("*", function (req, res) {
+app.get("*", async function (req, res) {
   res.redirect("/");
 });
 
