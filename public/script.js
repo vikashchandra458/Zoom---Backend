@@ -31,7 +31,7 @@ navigator.mediaDevices
       if (e.which == 13 && text.val().length !== 0) {
         if (USER_NAME !== "") {
           $("ul").append(
-            `<li class="message" style="text-align:right; padding-right:30px; color:green"><b>${USER_NAME}</b><br/>${text.val()}</li>`
+            `<li class="message" style="text-align:right; padding-right:1.875rem; color:green"><b>${USER_NAME}</b><br/>${text.val()}</li>`
           );
           socket.emit("message", text.val(), USER_NAME);
           text.val("");

@@ -8,8 +8,8 @@ body {
 }
 
 video {
-  width: 300px;
-  height: 400px;
+  width: 18.75rem;
+  height: 25rem;
   object-fit: cover;
 }
 
@@ -36,7 +36,7 @@ video {
   display: flex;
   background-color: #1c1e20;
   color: #d2d2d2;
-  padding: 5px;
+  padding: 0.3125rem;
   justify-content: space-between;
 }
 .main__controls__block {
@@ -47,17 +47,17 @@ video {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 8px 10px;
-  min-width: 80px;
+  padding: 0.5rem 0.625rem;
+  min-width: 5rem;
   cursor: pointer;
   text-align: center;
 }
 .main__controls__button i {
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 .main__controls__button:hover {
   background-color: #343434;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
 }
 .leave_meeting {
   color: #eb534b;
@@ -66,7 +66,7 @@ video {
   display: flex;
   flex-direction: column;
   background-color: #242324;
-  border-left: 1px solid #3d3d42;
+  border-left: 0.0625rem solid #3d3d42;
 }
 .main__header {
   color: #f5f5f5;
@@ -78,7 +78,7 @@ video {
 }
 
 .main__message_container {
-  padding: 22px 12px;
+  padding: 1.375rem 0.75rem;
   display: flex;
 }
 .main__message_container input {
