@@ -43,7 +43,8 @@ video {
   display: flex;
   background-color: #1c1e20;
   color: #d2d2d2;
-  padding: 0.3125rem;
+  /* padding: 0.3125rem; */
+  max-width: 100%;
   justify-content: space-between;
 }
 .main__controls__block {
@@ -54,9 +55,8 @@ video {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0.4rem 0.48rem;
+  padding: 0.4rem 0.3rem;
   /* min-width: 5rem; */
-  max-width: 100%;
   cursor: pointer;
   text-align: center;
 }
