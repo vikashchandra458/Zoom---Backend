@@ -1,4 +1,5 @@
 const socket = io("/");
+const height = $(window).height();
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 myVideo.muted = true;
@@ -18,6 +19,8 @@ navigator.mediaDevices
       call.answer(stream);
       const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
+        $("#video-grid").css("display", "grid");
+        $("#video-grid").css("max-height", `${height-70.78}`);
         addVideoStream(video, userVideoStream);
       });
     });
@@ -179,3 +182,6 @@ btn.addEventListener("click", async () => {
     resultPara.textContent = `Error: ${err}`;
   }
 });
+
+$(".main").css("height", `${height}px`);
+
