@@ -63,7 +63,7 @@
               <i class="fas fa-share"></i>
               <span>Share</span>
             </div>
-            <div class="main__controls__button">
+            <div class="get-user main__controls__button">
               <i class="fas fa-user-friends"></i>
               <span>Participants</span>
             </div>
@@ -135,6 +135,7 @@
 
           <!-- Modal footer -->
           <div class="modal-footer">
+            <button hidden type="button" class="hidden-click"></button>
             <button
               type="button"
               class="cancel btn btn-danger"
@@ -153,6 +154,7 @@
     <script>
       $(document).ready(function () {
         $(".js-click").trigger("click");
+        $(".hidden-click").trigger("click");
       });
     </script>
   </body>

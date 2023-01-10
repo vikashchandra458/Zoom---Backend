@@ -1,5 +1,7 @@
 const socket = io("/");
 const height = $(window).height();
+const width = $(window).width();
+
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 myVideo.muted = true;
@@ -7,8 +9,9 @@ let myVideoStream;
 var myPeer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: "443",
+  port: "3000",
 });
+// var count = 1;
 
 navigator.mediaDevices
   .getUserMedia({ audio: true, video: true })
@@ -16,16 +19,27 @@ navigator.mediaDevices
     myVideoStream = stream;
     addVideoStream(myVideo, stream);
     myPeer.on("call", (call) => {
+      d();
       call.answer(stream);
       const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
-        $("#video-grid").css("display", "grid");
-        $("#video-grid").css("max-height", `${height-70.78}`);
         addVideoStream(video, userVideoStream);
       });
     });
-    socket.on("user-connected", (userId) => {
+    socket.on("user-connected", (userId, userName) => {
+      d();
       setTimeout(connectToNewUser, 1000, userId, stream);
+    });
+    // socket.emit("update-others", USER_NAME);
+
+    var user = [];
+    $(".get-user").click(function () {
+      var clients = [USER_NAME];
+      socket.on("update members", (users) => {
+        user = users;
+        console.log(users);
+      });
+      alert(user.length != 0 ? windows.user : clients + " connected");
     });
 
     let text = $("input");
@@ -185,3 +199,17 @@ btn.addEventListener("click", async () => {
 
 $(".main").css("height", `${height}px`);
 
+$(".hidden-click").click(function () {
+  return (this.tog = !this.tog) ? c() : d();
+});
+
+const c = () => {
+  $("#video-grid").css("display", "flex");
+  $("#video-grid").css("height", `${height - 70.78}px`);
+  $("#video-grid").css("width", `auto`);
+};
+const d = () => {
+  $("#video-grid").css("display", "grid");
+  $("#video-grid").css("height", `auto`);
+  $("#video-grid").css("width", `100% !important`);
+};
