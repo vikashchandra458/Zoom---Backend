@@ -14,9 +14,9 @@ body {
 }
 
 video {
-  /* width: -webkit-fill-available;
-  height: -webkit-fill-available; */
-  object-fit: cover;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  object-fit: unset;
   padding: 2px;
 }
 

@@ -205,9 +205,11 @@ $(".hidden-click").click(function () {
 
 const c = () => {
   $("#video-grid").css("display", "flex");
-  $("#video-grid").css("height", `-webkit-fill-available`);
-  $(".main__left").css("width", `100% !important`);
-  $("#video-grid").css("width", `auto`);
+  // $("#video-grid").css("height", `${height - 70.78}px`);
+  $("#video-grid").css("width", `${width}px`);
+  $("video").css("width", `${width}px`);
+  $("video").css("height", `${height - 70.78}px`);
+
 };
 const d = () => {
   $("#video-grid").css("display", "grid");
