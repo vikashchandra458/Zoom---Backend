@@ -9,7 +9,7 @@ let myVideoStream;
 var myPeer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: "3000",
+  port: "443",
 });
 // var count = 1;
 
@@ -205,7 +205,7 @@ $(".hidden-click").click(function () {
 
 const c = () => {
   $("#video-grid").css("display", "flex");
-  $("#video-grid").css("height", `${height - 70.78}px`);
+  $("#video-grid").css("height", `-webkit-fill-available`);
   $("#video-grid").css("width", `auto`);
 };
 const d = () => {
