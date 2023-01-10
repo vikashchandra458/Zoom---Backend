@@ -12,11 +12,15 @@ body {
   /* align-items: stretch; */
   grid-template-columns: 1fr 1fr;
 }
+video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
 
 video {
   width: 100%;
   height: -webkit-fill-available;
-  object-fit: unset;
+  object-fit: fill;
   padding: 2px;                       
   align-self: center;
 }
