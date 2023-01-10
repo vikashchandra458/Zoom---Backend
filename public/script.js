@@ -9,7 +9,7 @@ let myVideoStream;
 var myPeer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: "443",
+  port: "3000",
 });
 // var count = 1;
 
@@ -26,8 +26,10 @@ navigator.mediaDevices
         addVideoStream(video, userVideoStream);
       });
     });
-    socket.on("user-connected", (userId, userName) => {
-      d();
+    socket.on("user-connected", (userId) => {
+      socket.on("no-of-users", (num) => {
+        d(num);
+      });
       setTimeout(connectToNewUser, 1000, userId, stream);
     });
     // socket.emit("update-others", USER_NAME);
@@ -160,9 +162,11 @@ const leave = () => {
 function a() {
   $(".main__left").css("flex", "1");
   $(".main__right").css("display", "none");
+  $("#video-grid").css("width", "100%");
 }
 function b() {
   $(".main__left").css("flex", "0.8");
+  // $("#video-grid").css("width", "80%");
   $(".main__right").css("display", "flex");
 }
 
@@ -200,19 +204,38 @@ btn.addEventListener("click", async () => {
 $(".main").css("height", `${height}px`);
 
 $(".hidden-click").click(function () {
-  return (this.tog = !this.tog) ? c() : d();
+  return (this.togg = !this.togg) ? c() : d();
 });
 
 const c = () => {
   $("#video-grid").css("display", "flex");
   // $("#video-grid").css("height", `${height - 70.78}px`);
-  $("#video-grid").css("width", `${width}px`);
-  $("video").css("width", `${width}px`);
+  $("#video-grid").css("width", `100%`);
+  $("video").css("width", `100%`);
   $("video").css("height", `${height - 70.78}px`);
-
 };
-const d = () => {
-  $("#video-grid").css("display", "grid");
-  $("#video-grid").css("height", `auto`);
-  $("#video-grid").css("width", `100% !important`);
+const d = (num) => {
+  console.log(num);
+  if (width < 500) {
+    $("#video-grid").css("flex-direction", `column`);
+    $("#video-grid").css("width", `100%`);
+    $("#video-grid").css("height", `-webkit-fill-available`);
+    $(".main").css("height", `-webkit-fill-available`);
+    $("video").css("height", `${(height - 70.78) / 2}px`);
+    $("video").css("width", `100%`);
+  }
+  if (width > 500) {
+    $("#video-grid").css("display", "grid");
+    $("#video-grid").css("grid-template-columns", "1fr 1fr");
+    $("#video-grid").css("height", `-webkit-fill-available`);
+    $("#video-grid").css("width", `100% !important`);
+    $("video").css("width", `100%`);
+    $("video").css("height", `-webkit-fill-available`);
+    if (num > 2) {
+      $("#video-grid").css(
+        "grid-template-rows",
+        `${(height - 70.78) / 2}px ${(height - 70.78) / 2}px`
+      );
+    }
+  }
 };

@@ -40,6 +40,8 @@ io.on("connection", (socket) => {
     socket.join(roomId);
     clients.push(userName);
 
+    const num = io.sockets.adapter.rooms.get(roomId).size;
+    io.to(roomId).emit("no-of-users", num);
     socket.broadcast.to(roomId).emit("user-connected", userId);
     socket.on("message", (message, name) => {
       socket.broadcast.to(roomId).emit("createMessage", message, name);

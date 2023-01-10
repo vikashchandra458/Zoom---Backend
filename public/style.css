@@ -6,7 +6,7 @@ body {
   display: grid;
   justify-content: center;
   flex-direction: row;
-  width: -webkit-fill-available;
+  width: 100%;                   
   height: -webkit-fill-available;
   /* height: 100% !important; */
   /* align-items: stretch; */
@@ -14,21 +14,22 @@ body {
 }
 
 video {
-  width: -webkit-fill-available;
+  width: 100%;
   height: -webkit-fill-available;
   object-fit: unset;
-  padding: 2px;
+  padding: 2px;                       
+  align-self: center;
 }
 
 .main {
   /* height: 100vh; */
-  width: -webkit-fill-available;
+  width: 100%;
   height: -webkit-fill-available;
 
   display: flex;
 }
 ::-webkit-scrollbar {
-  display:none;
+  display: none;
 }
 .main__left {
   flex: 0.8;
