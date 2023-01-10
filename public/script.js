@@ -206,6 +206,7 @@ $(".hidden-click").click(function () {
 const c = () => {
   $("#video-grid").css("display", "flex");
   $("#video-grid").css("height", `-webkit-fill-available`);
+  $(".main__left").css("width", `100% !important`);
   $("#video-grid").css("width", `auto`);
 };
 const d = () => {
