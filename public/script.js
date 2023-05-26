@@ -221,8 +221,7 @@ const d = (num) => {
     $("#video-grid").css("width", `100%`);
     $("#video-grid").css("height", `-webkit-fill-available`);
     $(".main").css("height", `-webkit-fill-available`);
-    
-    $("video").css("max-height", `${(height - 70.78) / 2}px`);
+    $("video").css("height", `${(height - 70.78) / 2}px`);
     $("video").css("width", `100%`);
   }
   if (width > 500) {
