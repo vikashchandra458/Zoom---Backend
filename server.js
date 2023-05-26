@@ -33,7 +33,8 @@ app.post("/:room", async (req, res) => {
 app.get("*", async function (req, res) {
   res.redirect("/");
 });
-var clients = [];
+let clients = [];
+console.log("clients", clients);
 
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, userId, userName) => {
@@ -42,9 +43,9 @@ io.on("connection", (socket) => {
 
     const num = io.sockets.adapter.rooms.get(roomId).size;
     io.to(roomId).emit("no-of-users", num);
-    socket.broadcast.to(roomId).emit("user-connected", userId);
+    socket.broadcast.to(roomId).emit("user-connected", userId, clients);
     socket.on("message", (message, name) => {
-      socket.broadcast.to(roomId).emit("createMessage", message, name);
+      socket.broadcast.to(roomId).emit("createMessage", message, name, clients);
     });
 
     socket.to(roomId).emit("update members", clients);

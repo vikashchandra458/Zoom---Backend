@@ -27,6 +27,7 @@ navigator.mediaDevices
       });
     });
     socket.on("user-connected", (userId) => {
+      console.log("userId: ", userId);
       socket.on("no-of-users", (num) => {
         d(num);
       });
