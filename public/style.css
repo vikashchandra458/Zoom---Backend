@@ -2,10 +2,20 @@ body {
   margin: 0;
   padding: 0;
 }
+@media screen and (max-width: 520px) {
+  #video-grid {
+    flex-direction: column !important;
+    height: 50vh !important;
+  }
+  .main {
+    height: 100vh !important;
+  }
+}
+
 #video-grid {
   display: grid;
   justify-content: center;
-  /* flex-direction: row; */
+  flex-direction: row;
   width: 100%;
   height: -webkit-fill-available;
   /* height: 100% !important; */
