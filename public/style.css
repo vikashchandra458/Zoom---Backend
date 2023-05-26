@@ -5,10 +5,6 @@ body {
 @media screen and (max-width: 520px) {
   #video-grid {
     flex-direction: column !important;
-    height: 50vh !important;
-  }
-  .main {
-    /* height: 100vh !important; */
   }
 }
 
@@ -63,15 +59,11 @@ video {
 }
 .main__controls {
   display: flex;
-  flex: 0.8;
   background-color: #1c1e20;
   color: #d2d2d2;
   /* padding: 0.3125rem; */
   max-width: 100%;
   justify-content: space-between;
-  bottom: 0px !IMPORTANT;
-  width: -webkit-fill-available;
-  position: absolute;
 }
 .main__controls__block {
   display: flex;
