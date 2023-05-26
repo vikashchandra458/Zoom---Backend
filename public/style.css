@@ -5,8 +5,8 @@ body {
 #video-grid {
   display: grid;
   justify-content: center;
-  flex-direction: row;
-  width: 100%;                   
+  /* flex-direction: row; */
+  width: 100%;
   height: -webkit-fill-available;
   /* height: 100% !important; */
   /* align-items: stretch; */
@@ -21,7 +21,7 @@ video {
   width: 100%;
   height: -webkit-fill-available;
   object-fit: fill;
-  padding: 2px;                       
+  padding: 2px;
   align-self: center;
 }
 

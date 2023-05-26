@@ -152,6 +152,15 @@
     </div>
     <script src="script.js"></script>
     <script>
+      const height = $(window).height();
+      const width = $(window).width();
+      if (width < 500) {
+        $("#video-grid").css("flex-direction", `column`);
+        $("video").css("height", `50vh`);
+        $("main").css("height", `100vh`);
+      } else {
+        $("#video-grid").css("flex-direction", `row`);
+      }
       $(document).ready(function () {
         $(".hidden-click").trigger("click");
         $(".js-click").trigger("click");
